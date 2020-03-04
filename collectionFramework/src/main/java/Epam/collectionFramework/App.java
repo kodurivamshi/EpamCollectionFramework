@@ -16,35 +16,78 @@ public class App
     public static void main( String[] args )
     {
         System.out.println( "<------ Employee List ----->\n" );
-        System.out.print("Enter the total number of employees :");
-        Scanner sc = new Scanner(System.in);
-        int no_of_employees = sc.nextInt();
-        EmployeeList emp = new EmployeeList(no_of_employees);
-        for(int index=0;index<no_of_employees;index++) {
-        	System.out.print("Enter the employee- "+(index+1)+ " name :");
-        	String name = sc.next();
-        	System.out.print("Enter the employee- "+(index+1)+ " age :");
-        	int age = sc.nextInt();
-        	System.out.print("Enter the employee- "+(index+1)+ " salary :");
-        	double salary= sc.nextDouble();
-        	System.out.print("Enter the employee- "+(index+1)+ " address :");
-        	String address= sc.next();
-        	Employee employee = new Employee(name,age,address,salary);
-        	emp.add(employee);
-
-        }
-        System.out.println("<-----The LIST is full----->\n");
-        System.out.println("the Created EMPLOYEE list is (by add method):- \n");
-        	emp.size();
-        	emp.dispaly();
-        
-        System.out.println("The shrinking Employee list (by remove method):- \n");
-        for(int index=no_of_employees-1;index>=0;index--) {
-        	System.out.println("\nthe list after deletion is:-\n");
-        	emp.remove(index);
-        	emp.dispaly();
-        	emp.size();
-        }
-        System.out.println("\n<-----The LIST is NULL----->\n");
+        Scanner scanner = new Scanner(System.in);
+        EmployeeList emp = new EmployeeList(1);
+        char ch='y',choice='y';
+        int option,size,index;
+        do {
+        	System.out.println("select the option:-\n");
+        	System.out.println("1.Add an employee \n 2.Insert the employee \n 3.Remove an employee \n 4.Details of Employee \n 5.Display the Employee list");
+        	option=scanner.nextInt();
+        	switch(option) {
+        	case 1:
+        		System.out.print("Enter the employee name :");
+            	String name = scanner.next();
+            	System.out.print("Enter the employee age :");
+            	int age = scanner.nextInt();
+            	System.out.print("Enter the employee salary :");
+            	double salary= scanner.nextDouble();
+            	System.out.print("Enter the employee address :");
+            	String address= scanner.next();
+            	Employee employee = new Employee(name,age,address,salary);
+            	emp.add(employee);
+            	break;
+        	case 2:
+        		System.out.print("Enter the employee name :");
+            	name = scanner.next();
+            	System.out.print("Enter the employee age :");
+            	age = scanner.nextInt();
+            	System.out.print("Enter the employee salary :");
+            	salary= scanner.nextDouble();
+            	System.out.print("Enter the employee address :");
+            	address= scanner.next();
+            	employee = new Employee(name,age,address,salary);
+            	System.out.println("enter the position to insert the employee...\n");
+            	int position=scanner.nextInt();
+            	emp.add(position-1, employee);
+            	System.out.println("successfulluy inserted...\n");
+        		break;
+        	case 3:
+        		size=emp.size();
+        		choice='y';
+        		System.out.println("the NAMES of the employee:-\n");
+        		for(index=1;index<=size;index++) {
+        			Employee e=emp.getIndex(index);
+        			System.out.println((index)+". "+e.getName()+"\n");
+        		}
+        		System.out.println("enter the index of particular employee to delete from the list");
+        		index=scanner.nextInt();
+        		emp.remove(index-1);
+        		System.out.println("\nsuccessfully removed.....\n");
+        		break;
+        		
+        	case 4:
+        		size=emp.size();
+        		choice='y';
+        		System.out.println("the NAMES of the employee:-\n");
+        		do {
+        		for(index=1;index<=size;index++) {
+        			Employee e=emp.getIndex(index);
+        			System.out.println((index)+". "+e.getName()+"\n");
+        		}
+        		System.out.println("enter the index of particular employee to see the details:-\n");
+        		index=scanner.nextInt();
+        		Employee e=emp.getIndex(index);
+        		System.out.println("\n"+"NAME:- "+e.getName()+"\nAGE:- "+e.getAge()+"\nSALARY:- "+e.getSalary()+"\nADDRES:- "+e.getAddress());
+        		System.out.println("\ndo want to see any other employee details(y/n)?\n");
+        		choice=scanner.next().charAt(0);
+        		}while(choice=='y');
+        		break;
+        	case 5:
+        		emp.dispaly();
+        	}
+        	System.out.println("\ndo u want to continue those opeartions(y/n)?\n");
+        	ch=scanner.next().charAt(0);
+        }while(ch=='y'||ch=='y');
     }
 }

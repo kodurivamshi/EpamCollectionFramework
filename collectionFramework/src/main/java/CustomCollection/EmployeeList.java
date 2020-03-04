@@ -36,19 +36,22 @@ public class EmployeeList {
 	public void remove(Employee e){
 		emp.remove(e);
 	}
-
+	
+	public Employee getIndex(int index) {
+		return emp.get(index-1);
+	}
+	
 	public void dispaly() {
 		for(int i=0;i<emp.size();i++) {
 			Employee e=emp.get(i);
 			System.out.println("\nEMPLOYEE-"+(i+1)+"\n"+"NAME:- "+e.getName()+"\nAGE:- "+e.getAge()+"\nSALARY:- "+e.getSalary()+"\nADDRES:- "+e.getAddress());
 		}
-		
 	}
 	
-	public void size() {
+	public int size() {
 		
-		System.out.println("\nthe Employee list SIZE is:- "+emp.size()+"\n");
-		
+		System.out.println("the Employee list SIZE is:- "+emp.size()+"\n");
+		return emp.size();
 	}
 
 	
